@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../../../../assets/logo.png";
 import moment from "moment";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 
 const Header = () => {
@@ -26,22 +26,6 @@ const Header = () => {
           some text.
         </Marquee>
       </div>
-      <Navbar expand="lg">
-        <Container>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mx-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">About</Nav.Link>
-              <Nav.Link href="#link">Career</Nav.Link>
-            </Nav>
-            <Button className="me-2" variant="secondary">
-              Profile
-            </Button>
-            <Button variant="success">Login</Button>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
     </Container>
   );
 };
