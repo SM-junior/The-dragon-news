@@ -1,12 +1,38 @@
 import React from "react";
+import { useState } from "react";
+import { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const Register = () => {
+  const [success, setSuccess] = useState("");
+  const { createUser } = useContext(AuthContext);
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const photo = event.target.photo.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    console.log(photo, name, email, password);
+
+    createUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        setSuccess("user has been created successfully");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    event.target.reset();
+  };
+
   return (
     <Container className="mx-auto w-25">
       <h2>Please register</h2>
-      <Form>
+      <Form onSubmit={handleRegister}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Your Name</Form.Label>
           <Form.Control
@@ -56,8 +82,9 @@ const Register = () => {
         <br />
         <Form.Text className="text-success">
           Already have an account ? <Link to="/login">Login</Link>
-        </Form.Text>
-        <Form.Text className="text-success"></Form.Text>
+        </Form.Text>{" "}
+        <br />
+        <Form.Text className="text-success">{success}</Form.Text>
         <Form.Text className="text-danger"></Form.Text>
       </Form>
     </Container>
